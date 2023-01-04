@@ -18,7 +18,7 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    releaseDate: { //fecha de lanzamiento
+    released: { //fecha de lanzamiento
       type: DataTypes.STRING,
     },
     rating: { //clasificacion
