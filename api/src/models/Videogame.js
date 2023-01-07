@@ -14,6 +14,10 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    image: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     description: {
       type: DataTypes.TEXT,
       allowNull: false,
@@ -24,9 +28,10 @@ module.exports = (sequelize) => {
     rating: { //clasificacion
       type: DataTypes.DECIMAL,
     },
-    platform: { //plataforma
-      type: DataTypes.STRING, 
-      allowNull:false,
-    }
+    createdDb:{
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue:true,
+    } 
   });
 };
