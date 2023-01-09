@@ -10,7 +10,7 @@ const videogames = require('./videogames');
    // Busco los 100 primeros videogames o ?name="nemo" busco los de ese nombre
 router.use('/videogames', videogames);
    // Busco un videogame por su ID
- //router.use('/videogame', videogame);
+//router.use('/videogame', videogame);
 
 //    // Busco todos los genres
 //  router.use('/genres', genres); 
