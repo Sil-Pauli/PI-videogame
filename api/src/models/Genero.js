@@ -15,4 +15,3 @@ module.exports = (sequelize) => {
       }
   });
 };
-//no generamos otro id, ya se genera solo
