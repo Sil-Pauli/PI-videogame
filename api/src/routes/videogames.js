@@ -6,49 +6,7 @@ const { Videogame, Genero, } = require('../db')
 
 const router = Router();
 
-
-// // ///////////////// trae todo de la Api   ///////////////
-// const getApiInfo =async () =>{
-//     const apiUrl = await axios.get(`https://api.rawg.io/api/games?search=${name}&key=${API_KEY}&page_size=15`);
-//     const apiInfo = await apiUrl.data.results.map(game=>{
-//         return{
-//             id: game.id,
-//             name: game.name,
-//             image: game.background_image,
-//             genres: game.genres.map(genre => genre.name),
-//             rating: game.rating,
-//             platforms: game.platforms.map(platform => platform.platform.name),
-//         };
-//     });
-//     return apiInfo;
-// }; 
-    
-// // ///////////////// trae todo del DB   ///////////////
-// const getDbinfo = async ()=>{
-//     const dbGames = await Videogame.findAll({
-//         include: {
-//             module: Genero,
-//             attributes: ['name'],
-//             througt:{
-//                 attributes:[],
-//             }
-//         } 
-//     });
-//     return dbGames;
-// };
-
-// // ///////////////// concatena la base de datos y la api  ///////////////
-// const getAllVideoGames = async ()=>{
-//     const apiInfo = await getApiInfo ();
-//     const dbInfo = await getDbinfo();
-//     const infoTotal = apiInfo.concat(dbInfo);
-//     return infoTotal;
-// };
-// ///////////////// get/videogames /////////////////
-// 
-
-
-
+/////// trae por Db,Api,nombre//////////
 router.get('/', async function (req, res) {
     const { name } = req.query;
     
@@ -65,7 +23,7 @@ router.get('/', async function (req, res) {
                 rating: game.rating,
                 platforms: game.platforms.map(platform => platform.platform.name),
             }
-          let gamesAPI = await axios.get(`https://api.rawg.io/api/games?search=${name}&key=${API_KEY}&page_size=15`) 
+          let gamesAPI = await axios.get(`${API_URL}/games?search=${name}&key=${API_KEY}&page_size=15`) 
           gamesAPIFull = gamesAPI.data.results.map((g) => {
             var game = {
                 id: g.id,
@@ -79,7 +37,7 @@ router.get('/', async function (req, res) {
           })
           res.json(gamesAPIFull.concat(gamesDBFull))
         } else {
-          let gamesAPI = await axios.get(`https://api.rawg.io/api/games?search=${name}&key=${API_KEY}&page_size=15`) 
+          let gamesAPI = await axios.get(`${API_URL}/games?search=${name}&key=${API_KEY}&page_size=15`) 
           gamesAPIFull = gamesAPI.data.results.map((p) => {
             var game = {
                 id: p.id,
@@ -95,7 +53,7 @@ router.get('/', async function (req, res) {
         }
       } else {
         let gamesResults = []
-        let apiRAWG = `https://api.rawg.io/api/games?key=${API_KEY}`
+        let apiRAWG = `${API_URL}/games?key=${API_KEY}`
         for (let index = 0; index < 5; index++) {
           let games = (await axios.get(apiRAWG)).data
           let dataGame = games.results.map((j) => {
