@@ -1,35 +1,36 @@
-require("dotenv").config();
-const { Router } = require('express');
-const axios = require('axios');
-const { API_KEY } = process.env;
-const { Videogame, Genero } = require('../db.js')
+// require("dotenv").config();
+// const { Router } = require('express'); 
+// // const axios = require('axios')
+// // const { API_KEY, API_URL} = process.env;
+// const { Videogame, Genero, } = require('../db')
+// const router = Router();
 
-const router = Router();
+//  ///// crea el video games,lo guarda en la db//////////
 
-/////// creo un video games//////////
-///////añade un video games a la db/////////
-router.post('/', async (req, res) => {
-    const { name, description, image, released, rating, platforms, genres } = req.body;
-  
-    let platformString = platforms.join(', ')
-  
-    let gameCreated = await Videogame.create({
-      name,
-      description,
-      image, 
-      released,
-      rating,
-      platforms: platformString,
-    })
-  
-    genres.forEach(async (G) => {
-        let genresGame = await Genero.findOne({ where: { name: G } })
-        await gameCreated.addGenre(genresGame)
-    })
-      res.send('Videogame created successfully!')
-  });
-  
+// router.post('/', async (req, res) => {  
+//   const { name, image, description, released, rating, platform, genero} = req.body;
+//     try {  
+//       const newGame = await Videogame.create({
+//         name,
+//         image,
+//         description,
+//         released,
+//         rating, 
+//         platform,
+//   });
 
-/////// crea el videogame//////////
-module.exports = router;
+//   let genreDb = await Genero.findAll({
+//     where: {
+//       name: genero,
+//     },
+//   });
+
+//   await newGame.addGenero(genreDb);
+//     res.status(200).send('Video game creado con exito');
+//     } catch (err) {
+//       res.status(404).send("Error del post");     
+//     }
+// });
+// module.exports = router;
+  
 
